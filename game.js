@@ -50,6 +50,57 @@ function addValue(value, url) {
   addImage(url);
 }
 
+// Algorithm for optimal solution
+function optimalChange(n) {
+  let numberOfTwenties = 0;
+  let numberOfTens = 0;
+  let numberOfFives = 0;
+  let numberOfOnes = 0;
+  while (n > 0) {
+    // If total is greater than 20
+    if (n >= 20) {
+      if (n % 20 === 0) {
+        numberOfTwenties = n / 20;
+        n = 0;
+      } else {
+        numberOfTwenties = Math.floor(n / 20);
+        n = n % 20;
+      }
+    }
+    // If total is greater or equal to 10
+    if (n >= 10) {
+      if (n % 10 === 0) {
+        numberOfTens = n / 10;
+        n = 0;
+      } else {
+        numberOfTens = Math.floor(n / 10);
+        n = n % 10;
+      }
+    }
+    // If total is greater or equal to 5
+    if (n >= 5) {
+      if (n % 5 === 0) {
+        numberOfFives = n / 5;
+        n = 0;
+      } else {
+        numberOfFives = Math.floor(n / 5);
+        n = n % 5;
+      }
+    }
+    // If total is greater or equal to 1
+    if (n >= 1) {
+      if (n % 1 === 0) {
+        numberOfOnes = n / 1;
+        n = 0;
+      } else {
+        numberOfOnes = Math.floor(n / 1);
+        n = n % 1;
+      }
+    }
+  }
+  console.log(numberOfTwenties, numberOfTens, numberOfFives, numberOfOnes);
+}
+
 // Adding event listeners for buttons
 newGameButton.addEventListener('click', () => resetGame());
 
