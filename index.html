@@ -9,27 +9,29 @@
   </head>
   <body>
     <div class="container all-center">
-      <h1 class="large">Change Game</h1>
+      <h1 class="x-large">Change Game</h1>
       <button class="btn btn-block btn-primary" id="new-game-button">
         New Game
       </button>
-      <h2 class="p-2" id="total-display">Press 'New Game' to begin</h2>
-      <div class="grid-3">
-        <button class="btn-light" id="twenty">$20</button>
-        <button class="btn-light" id="ten">$10</button>
-        <button class="btn-light" id="five">$5</button>
-        <button class="btn-light" id="one">$1</button>
-        <button class="btn-light" id="quarter">Quarter</button>
-        <button class="btn-light" id="dime">Dime</button>
-        <button class="btn-light" id="nickel">Nickel</button>
-        <button class="btn-light" id="penny">Penny</button>
+      <h2 class="p-2 large" id="total-display">Press 'New Game' to begin</h2>
+      <div class="grid-4">
+        <button class="btn btn-dark" id="twenty">$20</button>
+        <button class="btn btn-dark" id="ten">$10</button>
+        <button class="btn btn-dark" id="five">$5</button>
+        <button class="btn btn-dark" id="one">$1</button>
+        <button class="btn btn-dark" id="quarter">Quarter</button>
+        <button class="btn btn-dark" id="dime">Dime</button>
+        <button class="btn btn-dark" id="nickel">Nickel</button>
+        <button class="btn btn-dark" id="penny">Penny</button>
       </div>
-      <h2 class="p-2" id="result-area"></h2>
+      <h1 class="p-3" id="result-area"></h1>
+      <div class="p-2" id="solution-check-area"></div>
       <div class="grid-5" id="image-area"></div>
-      <button class="btn btn-block btn-primary" id="solution-button">
-        Solution
+      <h1 class="p-3" id="player-score-area"></h1>
+      <button class="btn btn-block btn-success" id="solution-button">
+        Optimal Solution
       </button>
-      <div class="grid-5" id="optimal-solution-area"></div>
+      <div class="grid-5 m-2" id="optimal-solution-area"></div>
     </div>
   </body>
   <script type="text/javascript" src="game.js"></script>

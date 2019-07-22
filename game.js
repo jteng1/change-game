@@ -3,6 +3,8 @@ const totalDisplay = document.getElementById('total-display');
 const imageArea = document.getElementById('image-area');
 const resultArea = document.getElementById('result-area');
 const optimalSolutionArea = document.getElementById('optimal-solution-area');
+const solutionCheckArea = document.getElementById('solution-check-area');
+const playerScoreArea = document.getElementById('player-score-area');
 
 // Money buttons
 const twentyButton = document.getElementById('twenty');
@@ -21,6 +23,10 @@ const solutionButton = document.getElementById('solution-button');
 // Initialize global count variables
 let total;
 let playerCount = 0;
+let playerTotalItems = 0;
+let optimalTotal = 0;
+let playerSuccess = 0;
+let playerFailure = 0;
 
 // Functions for game
 function addImage(url) {
@@ -36,10 +42,24 @@ function checkWin() {
     resultArea.innerHTML = `Your total is $${playerCount.toFixed(
       2
     )}, good job!`;
+    checkOptimal();
   } else if (playerCount > total) {
     resultArea.innerHTML = `Your total is $${playerCount.toFixed(
       2
-    )}! Hi De hits you with a stick, ouch!`;
+    )}! You gave away too much money!!!`;
+    checkOptimal();
+  }
+}
+
+function checkOptimal() {
+  if (playerTotalItems === optimalTotal) {
+    playerSuccess++;
+    solutionCheckArea.innerHTML += `<h1 class="alert alert-success" id="alert">OPTIMAL SOLUTION, GREAT WORK!</h1>`;
+    playerScoreArea.innerHTML = `Success: ${playerSuccess} Fail: ${playerFailure}`;
+  } else {
+    playerFailure++;
+    solutionCheckArea.innerHTML += `<h1 class="alert alert-danger" id="alert">NOT OPTIMAL SOLUTION, CLICK 'OPTIMAL SOLUTION' TO CHECK</h1>`;
+    playerScoreArea.innerHTML = `Success: ${playerSuccess} Fail: ${playerFailure}`;
   }
 }
 
@@ -84,10 +104,14 @@ function getOptimalSolution() {
 function resetGame() {
   total = (Math.random() * 300).toFixed(2);
   playerCount = 0;
+  playerTotalItems = 0;
+  optimalTotal = 0;
   imageArea.innerHTML = '';
-  totalDisplay.innerHTML = `Please give change for $${total}`;
+  totalDisplay.innerHTML = `Please give change for <br />$${total}`;
   resultArea.innerHTML = '';
   optimalSolutionArea.innerHTML = '';
+  solutionCheckArea.innerHTML = '';
+  optimalTotal = optimalChange(total).optimalTotal;
 }
 
 function addValue(value, url) {
@@ -184,6 +208,17 @@ function optimalChange(n) {
       n = 0;
     }
   }
+
+  let optimalTotal =
+    numberOfTwenties +
+    numberOfTens +
+    numberOfFives +
+    numberOfOnes +
+    numberOfQuarters +
+    numberOfDimes +
+    numberOfNickels +
+    numberOfPennies;
+
   return {
     numberOfTwenties,
     numberOfTens,
@@ -192,7 +227,8 @@ function optimalChange(n) {
     numberOfQuarters,
     numberOfDimes,
     numberOfNickels,
-    numberOfPennies
+    numberOfPennies,
+    optimalTotal
   };
 }
 
@@ -201,34 +237,42 @@ newGameButton.addEventListener('click', () => resetGame());
 
 solutionButton.addEventListener('click', () => getOptimalSolution());
 
-twentyButton.addEventListener('click', () =>
-  addValue(20, './images/twentyDollarBill.png')
-);
+twentyButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(20, './images/twentyDollarBill.png');
+});
 
-tenButton.addEventListener('click', () =>
-  addValue(10, './images/tenDollarBill.png')
-);
+tenButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(10, './images/tenDollarBill.png');
+});
 
-fiveButton.addEventListener('click', () =>
-  addValue(5, './images/fiveDollarBill.png')
-);
+fiveButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(5, './images/fiveDollarBill.png');
+});
 
-oneButton.addEventListener('click', () =>
-  addValue(1, './images/oneDollarBill.png')
-);
+oneButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(1, './images/oneDollarBill.png');
+});
 
-quarterButton.addEventListener('click', () =>
-  addValue(0.25, './images/quarterCoin.png')
-);
+quarterButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(0.25, './images/quarterCoin.png');
+});
 
-dimeButton.addEventListener('click', () =>
-  addValue(0.1, './images/dimeCoin.png')
-);
+dimeButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(0.1, './images/dimeCoin.png');
+});
 
-nickelButton.addEventListener('click', () =>
-  addValue(0.05, './images/nickelCoin.png')
-);
+nickelButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(0.05, './images/nickelCoin.png');
+});
 
-pennyButton.addEventListener('click', () =>
-  addValue(0.01, './images/pennyCoin.png')
-);
+pennyButton.addEventListener('click', () => {
+  playerTotalItems += 1;
+  addValue(0.01, './images/pennyCoin.png');
+});
