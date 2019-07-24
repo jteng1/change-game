@@ -29,15 +29,15 @@ let playerSuccess = 0;
 let playerFailure = 0;
 
 // Functions for game
-function addImage(url) {
+const addImage = url => {
   imageArea.innerHTML += `<img class='card img' src=${url}>`;
-}
+};
 
-function addOptimalSolutionImage(url) {
+const addOptimalSolutionImage = url => {
   optimalSolutionArea.innerHTML += `<img class='card img' src=${url}>`;
-}
+};
 
-function checkWin() {
+const checkWin = url => {
   if (playerCount.toFixed(2) === total) {
     resultArea.innerHTML = `Your total is $${playerCount.toFixed(
       2
@@ -49,9 +49,9 @@ function checkWin() {
     )}! You gave away too much money!!!`;
     checkOptimal();
   }
-}
+};
 
-function checkOptimal() {
+const checkOptimal = () => {
   if (playerTotalItems === optimalTotal) {
     playerSuccess++;
     solutionCheckArea.innerHTML += `<h1 class="alert alert-success" id="alert">OPTIMAL SOLUTION, GREAT WORK!</h1>`;
@@ -61,9 +61,9 @@ function checkOptimal() {
     solutionCheckArea.innerHTML += `<h1 class="alert alert-danger" id="alert">NOT OPTIMAL SOLUTION, CLICK 'OPTIMAL SOLUTION' TO CHECK</h1>`;
     playerScoreArea.innerHTML = `Success: ${playerSuccess} Fail: ${playerFailure}`;
   }
-}
+};
 
-function getOptimalSolution() {
+const getOptimalSolution = () => {
   let {
     numberOfTwenties,
     numberOfTens,
@@ -99,9 +99,9 @@ function getOptimalSolution() {
   for (let i = 0; i < numberOfPennies; i++) {
     addOptimalSolutionImage('./images/pennyCoin.png');
   }
-}
+};
 
-function resetGame() {
+const resetGame = () => {
   total = (Math.random() * 300).toFixed(2);
   playerCount = 0;
   playerTotalItems = 0;
@@ -112,16 +112,16 @@ function resetGame() {
   optimalSolutionArea.innerHTML = '';
   solutionCheckArea.innerHTML = '';
   optimalTotal = optimalChange(total).optimalTotal;
-}
+};
 
-function addValue(value, url) {
+const addValue = (value, url) => {
   playerCount += value;
   addImage(url);
   checkWin();
-}
+};
 
 // Algorithm for optimal solution
-function optimalChange(n) {
+const optimalChange = n => {
   let numberOfTwenties = 0;
   let numberOfTens = 0;
   let numberOfFives = 0;
@@ -230,7 +230,7 @@ function optimalChange(n) {
     numberOfPennies,
     optimalTotal
   };
-}
+};
 
 // Adding event listeners for buttons
 newGameButton.addEventListener('click', () => resetGame());
